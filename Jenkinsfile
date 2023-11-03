@@ -6,8 +6,23 @@ pipeline {
                  script {
                   checkout([$class: 'GitSCM', branches: [[name: 'mariem_benkhlifa_5twin3']], userRemoteConfigs: [[url: 'https://github.com/MariemBenKhlifaa/Achat-Devops.git']]])
                         }
-                    }
-         }
+                  }
+        }
+        stage('build stage') {
+            steps{
+                script {
+                    sh 'mvn clean install'
+
+                }
+            }
+        }
+        stage('test stage') {
+            steps {
+                script {
+                    sh 'mvn test'
+                }
+            }
+        }
   }
    post {
         success {

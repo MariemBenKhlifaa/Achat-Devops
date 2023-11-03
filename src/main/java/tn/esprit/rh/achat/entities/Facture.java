@@ -44,5 +44,8 @@ public class Facture implements Serializable {
     @JsonIgnore
     private Set<Reglement> reglements;
 
+	public Facture(Long id){
+		this.idFacture=id;
+	}
 	
 }

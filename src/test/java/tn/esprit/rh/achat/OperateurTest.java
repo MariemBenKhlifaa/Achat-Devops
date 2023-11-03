@@ -3,7 +3,6 @@ package tn.esprit.rh.achat;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -11,10 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.entities.Operateur;
-import tn.esprit.rh.achat.entities.Produit;
+
 import tn.esprit.rh.achat.repositories.OperateurRepository;
 import tn.esprit.rh.achat.services.OperateurServiceImpl;
-import tn.esprit.rh.achat.services.ProduitServiceImpl;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,7 +31,7 @@ public class OperateurTest {
     @MockBean
     private OperateurRepository operateurRepository;
     @Autowired
-    OperateurServiceImpl operateurService;
+   private OperateurServiceImpl operateurService;
     Set<Facture> factures = new HashSet<>();
 
     Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
@@ -47,8 +46,7 @@ public class OperateurTest {
         verify(operateurRepository).findAll();
     }
     @Test
-
-    public void  addOperateur() {
+    void  addOperateur() {
         Facture f = new Facture();
         factures.add(f);
         when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {

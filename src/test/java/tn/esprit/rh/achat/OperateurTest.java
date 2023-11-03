@@ -56,9 +56,9 @@ public class OperateurTest {
     void addOperateur() {
         //Set<Facture> factures = new HashSet<>();
 
-        when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {
+        Mockito.when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {
             Operateur model = invocation.getArgument(0);
-            model.setIdOperateur(2L);
+            model.setIdOperateur(1L);
             return model;
         });
 

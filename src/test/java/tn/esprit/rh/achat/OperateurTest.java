@@ -1,6 +1,7 @@
 package tn.esprit.rh.achat;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -8,8 +9,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.entities.Operateur;
+import tn.esprit.rh.achat.entities.Produit;
 import tn.esprit.rh.achat.repositories.OperateurRepository;
 
 import tn.esprit.rh.achat.services.OperateurServiceImpl;
@@ -25,40 +28,33 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@ExtendWith(MockitoExtension.class)
+@ContextConfiguration(classes = {OperateurServiceImpl.class})
+@ExtendWith(SpringExtension.class)
 public class OperateurTest {
 
     @MockBean
     private OperateurRepository operateurRepository;
-
+    @Autowired
     private OperateurServiceImpl operateurService;
 
+    Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").build();
 
 
     @Test
+    @Order(1)
     void retrieveAllOperateurs() {
-        Set<Facture> factures = new HashSet<>();
-        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
-
-        ArrayList<Operateur> operateurs = new ArrayList<>();
-        when(operateurRepository.findAll()).thenReturn(operateurs);
-
-        operateurService = new OperateurServiceImpl();
-
-        List<Operateur> actualRetrieveAllOperateurslist = operateurService.retrieveAllOperateurs();
-
-        assertEquals(operateurs, actualRetrieveAllOperateurslist);
-        assertEquals(0, actualRetrieveAllOperateurslist.size());
+        ArrayList<Operateur> operateurList = new ArrayList<>();
+        when(operateurRepository.findAll()).thenReturn(operateurList);
+        List<Operateur> actualRetrieveAllOperateurResult = operateurService.retrieveAllOperateurs();
+        assertSame(operateurList, actualRetrieveAllOperateurResult);
+        assertTrue(actualRetrieveAllOperateurResult.isEmpty());
         verify(operateurRepository).findAll();
     }
 
     @Test
+    @Order(0)
     void addOperateur() {
-        Set<Facture> factures = new HashSet<>();
-        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
-
-        Facture f = new Facture(2L);
-        factures.add(f);
+        //Set<Facture> factures = new HashSet<>();
 
         when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {
             Operateur model = invocation.getArgument(0);

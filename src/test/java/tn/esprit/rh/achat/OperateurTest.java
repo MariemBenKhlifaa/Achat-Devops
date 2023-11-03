@@ -56,18 +56,27 @@ public class OperateurTest {
     void addOperateur() {
         //Set<Facture> factures = new HashSet<>();
 
+        Set<Facture> factures = new HashSet<>();
+        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
+
+        // Mocking the save method to capture the Operateur object
         Mockito.when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {
             Operateur model = invocation.getArgument(0);
-            model.setIdOperateur(1L);
+            model.setIdOperateur(1L); // Setting ID
             return model;
         });
 
-        operateurService = new OperateurServiceImpl();
 
         log.info("Avant ==> " + o.toString());
         Operateur subscription = operateurService.addOperateur(o);
 
+        // Asserting the object
         assertEquals(subscription, o);
+
+        // Verifying the save method was called
+        verify(operateurRepository).save(o);
+
         log.info("Après ==> " + o.toString());
     }
+
 }

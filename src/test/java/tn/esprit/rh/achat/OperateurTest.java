@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 @Slf4j
 @ContextConfiguration(classes = {OperateurServiceImpl.class})
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
 public class OperateurTest {
     @MockBean
     private OperateurRepository operateurRepository;

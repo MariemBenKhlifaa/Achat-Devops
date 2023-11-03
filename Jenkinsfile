@@ -8,5 +8,12 @@ pipeline {
                         }
                     }
          }
+    post {
+        success {
+            echo 'successfully.'
+        }
+        failure {
+            echo 'Failed'
+        }
   }
 }

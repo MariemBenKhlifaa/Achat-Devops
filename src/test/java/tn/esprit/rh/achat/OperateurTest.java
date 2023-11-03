@@ -20,42 +20,45 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@ContextConfiguration(classes = {OperateurServiceImpl.class})
-
 @ExtendWith(MockitoExtension.class)
 public class OperateurTest {
 
     @MockBean
     private OperateurRepository operateurRepository;
-     @Autowired
+
     private OperateurServiceImpl operateurService;
 
-    Set<Facture> factures = new HashSet<>();
 
 
     @Test
     void retrieveAllOperateurs() {
-        ArrayList<Operateur> operateurs = new ArrayList<>();
+        Set<Facture> factures = new HashSet<>();
+        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
 
+        ArrayList<Operateur> operateurs = new ArrayList<>();
         when(operateurRepository.findAll()).thenReturn(operateurs);
+
+        operateurService = new OperateurServiceImpl();
+
         List<Operateur> actualRetrieveAllOperateurslist = operateurService.retrieveAllOperateurs();
 
-        assertSame(operateurs, actualRetrieveAllOperateurslist);
-        assertTrue(actualRetrieveAllOperateurslist.isEmpty());
+        assertEquals(operateurs, actualRetrieveAllOperateurslist);
+        assertEquals(0, actualRetrieveAllOperateurslist.size());
         verify(operateurRepository).findAll();
     }
 
     @Test
     void addOperateur() {
+        Set<Facture> factures = new HashSet<>();
+        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
+
         Facture f = new Facture(2L);
         factures.add(f);
-        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
 
         when(operateurRepository.save(Mockito.any(Operateur.class))).then(invocation -> {
             Operateur model = invocation.getArgument(0);
@@ -63,10 +66,12 @@ public class OperateurTest {
             return model;
         });
 
+        operateurService = new OperateurServiceImpl();
+
         log.info("Avant ==> " + o.toString());
         Operateur subscription = operateurService.addOperateur(o);
 
-        assertSame(subscription, o);
+        assertEquals(subscription, o);
         log.info("Après ==> " + o.toString());
     }
 }

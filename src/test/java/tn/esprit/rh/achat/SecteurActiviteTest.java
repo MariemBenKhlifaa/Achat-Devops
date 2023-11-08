@@ -33,7 +33,7 @@ public class SecteurActiviteTest {
     private SecteurActiviteServiceImpl secteurActiviteService;
 
     // Sample data for tests
-    SecteurActivite sa = new SecteurActivite(); // Initialize with sample data if necessary
+    SecteurActivite sa = SecteurActivite.builder().codeSecteurActivite("32324").libelleSecteurActivite("eyaaActivité").build();
 
     @Test
     @Order(1)

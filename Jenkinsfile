@@ -1,7 +1,7 @@
 pipeline {
   agent any
    environment {
-         MVN_PATH = '/usr/share/maven/bin/mvn'
+         MVN_PATH = '/usr/share/maven'
          NEXUS_REPOSITORY = 'nexus-releases'
          NEXUS_URL = 'http://192.168.1.25:8081/repository/maven-releases/'
          NEXUS_CREDENTIALS_ID = 'aa10f176-1eb7-4b38-aefc-99a98d5b40b6'

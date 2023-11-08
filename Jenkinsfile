@@ -34,17 +34,15 @@ pipeline {
       }
     }
     stage('Deploy to Nexus') {
-        when {
-          branch 'eya_bouthouri_5twin3' // Remplacer par le nom de la branche pour laquelle le déploiement doit être effectué
-        }
+
         steps {
           script {
             // Déployer l'artefact vers Nexus, s'assurer que le fichier pom.xml a la bonne configuration
             sh 'mvn deploy -DskipTests -P release --settings .m2/settings.xml'
           }
         }
-      }
 
+}
     stage('Build Docker Image') {
       steps {
         script {

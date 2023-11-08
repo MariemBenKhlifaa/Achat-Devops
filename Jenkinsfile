@@ -25,9 +25,9 @@ pipeline {
         }
         stage('sonarqube') {
             steps {
-                withSonarQubeEnv(installationName: 'sonarQube'){
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.java.binaries=target/classes'
-                }
+               withSonarQubeEnv('SonarQube') { // Remplacez 'MySonarQube' par le nom que vous avez donné dans la configuration Jenkins
+                   sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+               }
             }
         }
   }
@@ -39,4 +39,5 @@ pipeline {
             echo 'Failed'
         }
     }
+
 }

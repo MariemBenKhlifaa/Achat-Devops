@@ -30,6 +30,12 @@ pipeline {
                 }
             }
         }
+        stage('nexus') {
+            steps{
+                sh 'mvn deploy'
+            }
+
+        }
   }
    post {
         success {

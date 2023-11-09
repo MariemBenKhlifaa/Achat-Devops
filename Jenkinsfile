@@ -33,15 +33,15 @@ pipeline {
         }
       }
     }
-    stage('Deploy to Nexus') {
 
-        steps {
-          script {
-            // Déployer l'artefact vers Nexus, s'assurer que le fichier pom.xml a la bonne configuration
-            sh 'mvn deploy -DskipTests -P release --settings .m2/settings.xml'
-          }
-        }
-
+       stage('Publish to Nexus') {
+                   steps {
+                       script {
+                           // Vous pouvez utiliser mvn deploy pour publier dans Nexus, en assurant que
+                           // le pom.xml est bien configuré pour Nexus repository
+                           sh 'mvn deploy'
+                       }
+                   }
 }
     stage('Build Docker Image') {
       steps {

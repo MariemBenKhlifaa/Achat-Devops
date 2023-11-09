@@ -10,9 +10,8 @@
 	</parent>
 	<groupId>tn.esprit.rh</groupId>
 	<artifactId>achat</artifactId>
-	<version>1.0.1</version> <!-- Nouvelle version -->
+	<version>1.0</version>
 	<name>achat</name>
-
 	<description>Projet pour le module DevOps</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -134,10 +133,6 @@
 			<name>Nexus Repository</name>
 			<url>http://192.168.1.26:8081/repository/maven-releases/</url>
 		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://192.168.1.26:8081/repository/maven-snapshots/</url>
-		</snapshotRepository>
 
 	</distributionManagement>
 </project>

@@ -57,9 +57,7 @@ pipeline {
        }
 
        stage('Push Docker Image') {
-         when {
-           branch 'eya_bouthouri_5twin3' // Pousser les images uniquement pour la branche 'main'
-         }
+         
          steps {
           script {
                 // Utilise les identifiants stockés pour se connecter au Docker Hub

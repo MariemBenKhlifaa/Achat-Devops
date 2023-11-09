@@ -57,11 +57,12 @@ pipeline {
        }
 
        stage('Push Docker Image') {
-         
+
          steps {
           script {
                 // Utilise les identifiants stockés pour se connecter au Docker Hub
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials')
+ {
                   def dockerImageName = 'eyaay/achat-devops'
                   def dockerImageTag = 'latest'
                   // Pousser l'image Docker

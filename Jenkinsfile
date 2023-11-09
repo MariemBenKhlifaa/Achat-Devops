@@ -43,38 +43,37 @@ pipeline {
                        }
                    }
 }
-    stage('Build Docker Image') {
-      steps {
-        script {
-          // Change this to your DockerHub username if you want to push to DockerHub
-          // Or to the path of your image if you use a private registry
-          def dockerImageName = 'eyaay/alpine'
-          def dockerImageTag = 'latest'
+   stage('Build Docker Image') {
+         steps {
+           script {
+             // Utilisez votre nom d'utilisateur Docker Hub ici
+             def dockerImageName = 'eyaay/achat-devops'
+             def dockerImageTag = 'latest'
 
-          // Building the Docker image
-          sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
-        }
-      }
-    }
+             // Construction de l'image Docker
+             sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
+           }
+         }
+       }
 
-    stage('Push Docker Image') {
-      when {
-        branch 'main' // Only push images for the 'main' branch
-      }
-      steps {
-        script {
-          // Ensure credentials are stored in Jenkins and use them
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            def dockerImageName = 'eyaay/alpine'
-            def dockerImageTag = 'latest'
+       stage('Push Docker Image') {
+         when {
+           branch 'main' // Pousser les images uniquement pour la branche 'main'
+         }
+         steps {
+           script {
+             // Assurez-vous que les identifiants Docker Hub sont stockés dans Jenkins
+             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+               def dockerImageName = 'eyaay/achat-devops'
+               def dockerImageTag = 'latest'
 
-            // Pushing the Docker image
-            sh "docker push ${dockerImageName}:${dockerImageTag}"
-          }
-        }
-      }
-    }
-  }
+               // Pousser l'image Docker
+               sh "docker push ${dockerImageName}:${dockerImageTag}"
+             }
+           }
+         }
+       }
+     }
 
   post {
     success {

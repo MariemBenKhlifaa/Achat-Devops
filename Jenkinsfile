@@ -56,18 +56,21 @@ pipeline {
          }
        }
 
-      stage('Push Docker Image') {
-          steps {
-              script {
-                  // Se connecter au Docker Hub
-                  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                      // Pousser l'image Docker
-                      sh "docker push eyaay/achat-devops:latest"
-                  }
-              }
-          }
-      }
+       stage('Push Docker Image') {
 
+         steps {
+          script {
+                // Utilise les identifiants stockés pour se connecter au Docker Hub
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                  def dockerImageName = 'eyaay/achat-devops'
+                  def dockerImageTag = 'latest'
+                  // Pousser l'image Docker
+                  sh "docker push ${dockerImageName}:${dockerImageTag}"
+                }
+           }
+         }
+       }
+     }
 
   post {
     success {

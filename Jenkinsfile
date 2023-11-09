@@ -61,15 +61,14 @@ pipeline {
            branch 'main' // Pousser les images uniquement pour la branche 'main'
          }
          steps {
-           script {
-             // Assurez-vous que les identifiants Docker Hub sont stockés dans Jenkins
-             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-               def dockerImageName = 'eyaay/achat-devops'
-               def dockerImageTag = 'latest'
-
-               // Pousser l'image Docker
-               sh "docker push ${dockerImageName}:${dockerImageTag}"
-             }
+          script {
+                // Utilise les identifiants stockés pour se connecter au Docker Hub
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                  def dockerImageName = 'eyaay/achat-devops'
+                  def dockerImageTag = 'latest'
+                  // Pousser l'image Docker
+                  sh "docker push ${dockerImageName}:${dockerImageTag}"
+                }
            }
          }
        }

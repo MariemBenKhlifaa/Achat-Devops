@@ -1,6 +1,10 @@
 pipeline {
   agent any
-
+ environment {
+        DOCKER_IMAGE = 'eyaay/achat-devops'
+        DOCKER_TAG = 'latest'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+    }
   stages {
     stage('Get source Code') {
       steps {
@@ -57,22 +61,18 @@ pipeline {
        }
 
        stage('Push Docker Image') {
-         when {
-           branch 'main' // Pousser les images uniquement pour la branche 'main'
-         }
-         steps {
-          script {
-                // Utilise les identifiants stockés pour se connecter au Docker Hub
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                  def dockerImageName = 'eyaay/achat-devops'
-                  def dockerImageTag = 'latest'
-                  // Pousser l'image Docker
-                  sh "docker push ${dockerImageName}:${dockerImageTag}"
-                }
-           }
-         }
-       }
-     }
+
+       steps {
+                      script {
+                          // Utilise les identifiants stockés pour se connecter au Docker Hub
+                          docker.withRegistry('https://registry.hub.docker.com', env.DOCKER_CREDENTIALS_ID) {
+                              // Pousser l'image Docker
+                              sh "docker push ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                          }
+                      }
+          }
+          }
+          
 
   post {
     success {

@@ -48,7 +48,7 @@ pipeline {
         script {
           // Change this to your DockerHub username if you want to push to DockerHub
           // Or to the path of your image if you use a private registry
-          def dockerImageName = 'eyaay/achat-devops'
+          def dockerImageName = 'eyaay/alpine'
           def dockerImageTag = 'latest'
 
           // Building the Docker image
@@ -65,7 +65,7 @@ pipeline {
         script {
           // Ensure credentials are stored in Jenkins and use them
           docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            def dockerImageName = 'eyaay/achat-devops'
+            def dockerImageName = 'eyaay/alpine'
             def dockerImageTag = 'latest'
 
             // Pushing the Docker image

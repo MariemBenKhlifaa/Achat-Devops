@@ -50,7 +50,7 @@ pipeline {
                 }
             }
         }
-        stage('Push vers DockerHub') {
+        stage('Push to DockerHub') {
             steps {
                 script {
                     sh 'docker push mariembenkhlifa/achat-devops:latest'

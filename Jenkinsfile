@@ -53,7 +53,14 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 script {
-                    sh 'docker push mariem78/achat-devops'
+                    sh 'docker push mariem78/achat-devops:latest'
+                }
+            }
+        }
+        stage('Docker compose') {
+            steps {
+                script {
+                    sh 'docker-compose up -d'
                 }
             }
         }

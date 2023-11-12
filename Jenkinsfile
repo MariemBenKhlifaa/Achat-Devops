@@ -34,8 +34,17 @@ pipeline {
             steps{
                 sh 'mvn deploy'
             }
-
         }
+        stages {
+            stage('Docker build ') {
+                steps {
+                    script {
+                        // Build the Docker image
+                        sh 'docker build -t dorsafch/achat:latest .'
+                    }
+                }
+            }
+
   }
    post {
         success {

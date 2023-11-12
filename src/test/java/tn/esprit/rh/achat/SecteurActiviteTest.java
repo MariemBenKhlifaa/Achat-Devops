@@ -46,6 +46,8 @@ public class SecteurActiviteTest {
         assertSame(secteurActiviteList, actualSecteurActiviteList);
         assertTrue(actualSecteurActiviteList.isEmpty());
         verify(secteurActiviteRepository).findAll();
+        log.info("ret ==> " + sa.toString());
+
     }
 
     @Test
@@ -56,6 +58,7 @@ public class SecteurActiviteTest {
             SecteurActivite sa = invocation.getArgument(0);
             sa.setIdSecteurActivite(1L); // Assuming a setter method for ID exists
             return sa;
+
         });
 
         log.info("Avant ==> " + sa.toString());
@@ -93,6 +96,8 @@ public class SecteurActiviteTest {
         SecteurActivite foundSa = secteurActiviteService.retrieveSecteurActivite(id);
         assertSame(foundSa, sa);
         verify(secteurActiviteRepository).findById(id);
+        log.info("ret ==> " + sa.toString());
+
     }
 
 }

@@ -28,20 +28,20 @@ import java.util.List;
 
 	@Override
 	public void deleteSecteurActivite(Long id) {
-<span class="nc" id="L31">		secteurActiviteRepository.deleteById(id);</span>
+<span class="fc" id="L31">		secteurActiviteRepository.deleteById(id);</span>
 		
-<span class="nc" id="L33">	}</span>
+<span class="fc" id="L33">	}</span>
 
 	@Override
 	public SecteurActivite updateSecteurActivite(SecteurActivite sa) {
-<span class="nc" id="L37">		secteurActiviteRepository.save(sa);</span>
-<span class="nc" id="L38">		return sa;</span>
+<span class="fc" id="L37">		secteurActiviteRepository.save(sa);</span>
+<span class="fc" id="L38">		return sa;</span>
 	}
 
 	@Override
 	public SecteurActivite retrieveSecteurActivite(Long id) {
-<span class="nc" id="L43">		SecteurActivite secteurActivite = secteurActiviteRepository.findById(id).orElse(null);</span>
-<span class="nc" id="L44">		return secteurActivite;</span>
+<span class="fc" id="L43">		SecteurActivite secteurActivite = secteurActiviteRepository.findById(id).orElse(null);</span>
+<span class="fc" id="L44">		return secteurActivite;</span>
 	}
 
 }

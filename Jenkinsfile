@@ -39,11 +39,18 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t dorsafch/achat:latest .'
+                    sh 'docker build -t dorsafch/achat_dorsaf:latest .'
+                }
+            }
+        stage('Docker push') {
+            steps {
+                script {
+                    // Push the Docker image to Docker Hub
+                    sh 'docker push dorsafch/achat_dorsaf:latest'
                 }
             }
         }
-           
+
   }
    post {
         success {

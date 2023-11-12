@@ -56,20 +56,21 @@ pipeline {
          }
        }
 
-       stage('Push Docker Image') {
+      stage('Push Docker Image') {
+                         steps {
+                             script {
+                                 // Utiliser les crédentials pour se connecter au Docker Hub
+                                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                                     // Connexion Docker
+                                     sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin'
 
-         steps {
-          script {
-                // Utilise les identifiants stockés pour se connecter au Docker Hub
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                                     // Pousser l'image Docker
+                                     sh "docker push eyaay/achat-devops:latest"
+                                 }
+                             }
+                         }
+                     }
 
-                  // Pousser l'image Docker
-                  sh "docker push eyaay/achat-devops:latest"                }
-           }
-         }
-       }
-     }
-     
 
 
   post {

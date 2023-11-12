@@ -23,13 +23,13 @@ pipeline {
                 }
             }
         }
-        stage('sonarqube') {
-            steps {
-                withSonarQubeEnv(installationName: 'sonarQube'){
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Dsonar.java.binaries=target/classes'
-                }
-            }
-        }
+       stage('SonarQube') {
+                   steps {
+                       withSonarQubeEnv('SonarQube') {
+                           sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                       }
+                   }
+       }
         stage('nexus') {
             steps{
                 sh 'mvn deploy'

@@ -36,16 +36,20 @@ pipeline {
             }
 
         }
-        stage('docker_image') {
-            steps{
-            	script {
-                    def ImageName = 'achat-devops'
-                    def ImageTag = 'latest'
-                    sh "docker build -t ${ImageName}:${ImageTag} ."
+        stage('Login') {
+                   steps {
+                       script {
+                          sh 'docker login --username mariem78  --password momo22377981'
+                       }
+                    }
                 }
-                
-            }
 
+        stage('Build Docker Image') {
+            steps {
+               script {
+                   sh 'docker build -t mariembenkhlifa/achat-devops:latest .'
+                }
+            }
         }
         
 

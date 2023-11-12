@@ -36,15 +36,7 @@ pipeline {
             }
 
         }
-        stage('Docker image'){
-            steps{
-                script {
-                    def ImageName = 'achat-devops'
-                    def ImageTag = 'latest'
-                    sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
-                    }
-            }
-        }
+        
 
   }
    post {

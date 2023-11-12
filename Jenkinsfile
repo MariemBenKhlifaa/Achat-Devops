@@ -37,14 +37,20 @@ pipeline {
         }
         stage('Docker build ') {
             steps {
-                script {
-                    // Build the Docker image
-                    sh 'docker build -t dorsafch/achat_dorsaf:latest .'
-                }
+                  script {
+                        // Log in to Docker Hub
+                        withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
+                            sh 'docker login -u dorsafch -p $DOCKERHUB_PASSWORD'
+                        }
+
+                        // Build the Docker image with a different name or tag
+                        sh 'docker build -t dorsafch/achat:latest .'
+                  }
             }
         stage('Docker push') {
             steps {
                 script {
+                    withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
                     // Push the Docker image to Docker Hub
                     sh 'docker push dorsafch/achat_dorsaf:latest'
                 }

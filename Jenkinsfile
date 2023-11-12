@@ -70,23 +70,24 @@ pipeline {
                 }
             }
         }
-    }
-stage('Grafana') {
-    steps {
-        script {
-            // Use the Jenkins credentials binding plugin to inject the API key
-            withCredentials([string(credentialsId: 'grafana-key', variable: 'GRAFANA_API_KEY')]) {
-                // Use the API key in the curl command
-                sh '''
-                curl -X POST -H "Content-Type: application/json" \
-                     -H "Authorization: Bearer $GRAFANA_API_KEY" \
-                     -d @your_json_file_here \
-                     "http://192.168.1.26:3000/api/dashboards/db"
-                '''
+        stage('Grafana') {
+            steps {
+                script {
+                    // Use the Jenkins credentials binding plugin to inject the API key
+                    withCredentials([string(credentialsId: 'grafana-key', variable: 'GRAFANA_API_KEY')]) {
+                        // Use the API key in the curl command
+                        sh '''
+                        curl -X POST -H "Content-Type: application/json" \
+                             -H "Authorization: Bearer $GRAFANA_API_KEY" \
+                             -d @your_json_file_here \
+                             "http://192.168.1.26:3000/api/dashboards/db"
+                        '''
+                    }
+                }
             }
         }
     }
-}
+
 
     post {
         always {

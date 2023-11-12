@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('test stage') {
+        stage('jUnit') {
             steps {
                 script {
                     sh 'mvn test'
@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('sonarqube') {
+        stage('SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
@@ -34,7 +34,7 @@ pipeline {
             }
         }
 
-        stage('Publish to Nexus') {
+        stage('Nexus') {
             steps {
                 script {
                     sh 'mvn deploy'
@@ -63,7 +63,7 @@ pipeline {
             }
         }
 
-        stage('Deploy with Docker Compose') {
+        stage('Docker Compose') {
             steps {
                 script {
                     sh 'docker-compose up -d'

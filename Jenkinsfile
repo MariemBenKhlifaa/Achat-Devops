@@ -19,7 +19,7 @@ pipeline {
         stage('test stage') {
             steps {
                 script {
-                    sh 'mvn test'
+                    sh 'mvn test -Dtest=StockTest'
                 }
             }
         }

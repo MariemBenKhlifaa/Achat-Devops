@@ -37,12 +37,12 @@ pipeline {
 
         }
         stage('Login') {
-                   steps {
-                       script {
-                          sh 'docker login --username mariem78  --password momo22377981'
+		steps {
+                	script {
+                        	 sh 'docker login --username mariem78  --password-stdin'
                        }
                     }
-                }
+	}
 
         stage('Build Docker Image') {
             steps {

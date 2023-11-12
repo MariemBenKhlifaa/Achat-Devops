@@ -72,7 +72,7 @@ pipeline {
                      }
 
 
-
+}
   post {
     success {
       echo 'The process completed successfully.'
@@ -81,5 +81,4 @@ pipeline {
       echo 'The process failed.'
     }
   }
-}
 }

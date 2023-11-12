@@ -36,7 +36,7 @@ pipeline {
             }
 
         }
-        stage('docker image'){
+        stage('Docker Image'){
             steps{
                 script {
                     def ImageName = 'achat-devops'

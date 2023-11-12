@@ -41,7 +41,7 @@ public class StockTest {
     void retrieveAllStocks() {
         List<Stock> stockList = new ArrayList<>();
         when(stockRepository.findAll()).thenReturn(stockList);
-
+//com
         List<Stock> actualStockList = stockService.retrieveAllStocks();
 
         assertSame(stockList, actualStockList);

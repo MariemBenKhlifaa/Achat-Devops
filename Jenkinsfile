@@ -44,7 +44,7 @@ pipeline {
                         }
 
                         // Build the Docker image with a different name or tag
-                        sh 'docker build -t dorsafch/achat:latest .'
+                        sh 'docker build -t dorsafch/achat_dorsaf:latest .'
                   }
             }
         stage('Docker push') {

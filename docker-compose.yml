@@ -4,29 +4,11 @@ services:
   achatdb:
     image: mysql:5.7
     restart: unless-stopped
-
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=achatdb
     ports:
       - "3306:3306"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?autoReconnect=true&useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
-    depends_on:
-
-      - mysql
-    networks:
-      - devops-network
-
-  mysql:
-    image: mysql:5.6
-
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: achatdb
     volumes:
       - db:/var/lib/mysql
   app-timesheet:

@@ -67,18 +67,23 @@ class StockTest {
 
     @Test
     void testUpdateStock() {
-        // Créez un stock simulé pour simuler la mise à jour
-        Stock mockStock = new Stock(/* initialiser avec des données appropriées */);
-        // configurez le comportement simulé du stockRepository
-        when(stockRepository.save(any())).thenReturn(mockStock);
+        // Create a stock simulated for updating
+        Stock mockStock = new Stock(/* initialize with appropriate data */);
 
-        // Appelez la méthode du service
+        // Configure the simulated behavior of the stockRepository.save
+        when(stockRepository.save(any(Stock.class))).thenReturn(mockStock);
+
+        // Call the service method
         Stock result = stockService.updateStock(mockStock);
 
-        // Vérifiez les résultats
+        // Verify that the save method was called with the correct stock object
+        verify(stockRepository, times(1)).save(eq(mockStock));
+
+        // Verify the result
         assertNotNull(result);
-        // Vous pouvez effectuer d'autres vérifications en fonction de la structure de votre projet.
+        // You can perform additional verifications based on your project's structure.
     }
+
 
     @Test
     void testRetrieveStatusStock() {

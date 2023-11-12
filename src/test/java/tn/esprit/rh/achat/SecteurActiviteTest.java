@@ -13,9 +13,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
 import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -59,14 +61,38 @@ public class SecteurActiviteTest {
         log.info("Avant ==> " + sa.toString());
         SecteurActivite addedSecteurActivite = secteurActiviteService.addSecteurActivite(sa);
 
-        // Asserting the object
         assertEquals(addedSecteurActivite, sa);
 
-        // Verifying the save method was called
         verify(secteurActiviteRepository).save(sa);
 
         log.info("Après ==> " + sa.toString());
     }
 
-    // Repeat this pattern for the other methods in your service class
+    @Test
+    @Order(3)
+    void deleteSecteurActivite() {
+        Long id = 1L;
+        secteurActiviteService.deleteSecteurActivite(id);
+        verify(secteurActiviteRepository).deleteById(id);
+    }
+
+    @Test
+    @Order(4)
+    void updateSecteurActivite() {
+        SecteurActivite updatedSa = SecteurActivite.builder().idSecteurActivite(1L).codeSecteurActivite("32325").libelleSecteurActivite("eyaaActivitéUpdated").build();
+        when(secteurActiviteRepository.save(any(SecteurActivite.class))).thenReturn(updatedSa);
+        SecteurActivite returnedSa = secteurActiviteService.updateSecteurActivite(updatedSa);
+        assertEquals(returnedSa, updatedSa);
+        verify(secteurActiviteRepository).save(updatedSa);
+    }
+    @Test
+    @Order(5)
+    void retrieveSecteurActivite() {
+        Long id = 1L;
+        when(secteurActiviteRepository.findById(id)).thenReturn(Optional.of(sa));
+        SecteurActivite foundSa = secteurActiviteService.retrieveSecteurActivite(id);
+        assertSame(foundSa, sa);
+        verify(secteurActiviteRepository).findById(id);
+    }
+
 }

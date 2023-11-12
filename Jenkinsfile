@@ -47,6 +47,7 @@ pipeline {
                         sh 'docker build -t dorsafch/achat_dorsaf:latest .'
                   }
             }
+        }
         stage('Docker push') {
             steps {
                 script {

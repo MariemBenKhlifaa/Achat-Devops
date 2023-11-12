@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Get source Code') {
+        stage('Git') {
             steps {
                 script {
                     checkout([$class: 'GitSCM', branches: [[name: 'eya_bouthouri_5twin3']], userRemoteConfigs: [[url: 'https://github.com/MariemBenKhlifaa/Achat-Devops.git']]])
@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-        stage('build stage') {
+        stage(' maven build ') {
             steps{
                 script {
                     sh 'mvn clean install'
@@ -18,7 +18,7 @@ pipeline {
             }
         }
 
-        stage('jUnit') {
+        stage('Junit') {
             steps {
                 script {
                     sh 'mvn test'

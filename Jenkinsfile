@@ -53,10 +53,10 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
                     // Push the Docker image to Docker Hub
                     sh 'docker push dorsafch/achat_dorsaf:latest'
+                    }
                 }
             }
         }
-
   }
    post {
         success {

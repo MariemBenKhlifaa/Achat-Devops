@@ -44,13 +44,6 @@ pipeline {
                     }
 	}
 
-        stage('Build Docker Image') {
-            steps {
-               script {
-                   sh 'docker build -t mariembenkhlifa/achat-devops:latest .'
-                }
-            }
-        }
         
 
   }

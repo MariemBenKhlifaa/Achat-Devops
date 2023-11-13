@@ -1,6 +1,11 @@
 pipeline {
   agent any
-
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    timestamps()
+    timeout(time: 1, unit: 'HOURS')
+    debug(true)
+  }
   stages {
         stage('Get source Code') {
               steps {
@@ -80,7 +85,7 @@ pipeline {
                    def grafanaUrl = "http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1" // Replace with your Grafana server URL
 
                    // Example: Query Grafana for a specific dashboard panel
-                   def panelId = 1 // Replace with the ID of the Grafana panel you want to query
+                   def panelId = 15 // Replace with the ID of the Grafana panel you want to query
                    def response = httpRequest httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}"
 
                    echo "Response Code: ${response.statusCode}"

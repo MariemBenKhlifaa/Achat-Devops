@@ -1,11 +1,6 @@
 pipeline {
   agent any
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '10'))
-    timestamps()
-    timeout(time: 1, unit: 'HOURS')
-    debug(true)
-  }
+ 
   stages {
         stage('Get source Code') {
               steps {

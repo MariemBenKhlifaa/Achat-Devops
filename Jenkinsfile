@@ -40,7 +40,7 @@ pipeline {
                                  steps {
                                      script {
                                          // Build the Docker image
-                                         sh 'docker build -t ella/achat:latest .'
+                                         sh 'docker build -t ellaboulifi/achat:latest .'
                                      }
                                  }
                              }

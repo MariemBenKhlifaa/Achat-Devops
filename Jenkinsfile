@@ -86,7 +86,7 @@ pipeline {
 
                    // Example: Query Grafana for a specific dashboard panel
                    def panelId = 15 // Replace with the ID of the Grafana panel you want to query
-                   def response = httpRequest httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}"
+                   def response = httpRequest(httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}")
 
                    echo "Response Code: ${response.statusCode}"
                    echo "Response Content: ${response.content}"

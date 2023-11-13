@@ -1,11 +1,6 @@
 pipeline {
   agent any
-  options {
-          buildDiscarder(logRotator(numToKeepStr: '10'))
-          timestamps()
-          timeout(time: 1, unit: 'HOURS')
-          debug(true)
-      }
+
   stages {
         stage('Get source Code') {
               steps {
@@ -79,24 +74,27 @@ pipeline {
                  }
              }
          }
-         stage('Grafana Monitoring') {
-
-            steps {
+          stage('Grafana Monitoring') {
+             steps {
                 script {
-                    def grafanaUrl = "http://192.168.1.82:3000" // Replace with your Grafana server URL
+                   def grafanaUrl = "http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1" // Replace with your Grafana server URL
 
-                    // Example: Query Grafana for a specific dashboard panel
-                    def panelId = 1 // Replace with the ID of the Grafana panel you want to query
-                    def response = httpRequest httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}"
+                   // Example: Query Grafana for a specific dashboard panel
+                   def panelId = 1 // Replace with the ID of the Grafana panel you want to query
+                   def response = httpRequest httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}"
 
-                    // Process the response, you can use the data in your pipeline
-                    def annotations = readJSON text: response.content
-                    echo "Grafana Annotations: ${annotations}"
+                   echo "Response Code: ${response.statusCode}"
+                   echo "Response Content: ${response.content}"
 
-                    // You can add more steps to interact with Grafana as needed
+                   // Process the response, you can use the data in your pipeline
+                   def annotations = readJSON text: response.content
+                   echo "Grafana Annotations: ${annotations}"
+
+                   // You can add more steps to interact with Grafana as needed
                 }
-            }
-         }
+             }
+          }
+
   }
    post {
         always {

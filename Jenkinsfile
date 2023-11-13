@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  options {
+          buildDiscarder(logRotator(numToKeepStr: '10'))
+          timestamps()
+          timeout(time: 1, unit: 'HOURS')
+          debug(true)
+      }
   stages {
         stage('Get source Code') {
               steps {
@@ -74,6 +80,7 @@ pipeline {
              }
          }
          stage('Grafana Monitoring') {
+
             steps {
                 script {
                     def grafanaUrl = "http://192.168.1.82:3000" // Replace with your Grafana server URL

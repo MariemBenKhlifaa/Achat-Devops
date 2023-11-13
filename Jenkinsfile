@@ -86,7 +86,7 @@ pipeline {
                      def grafanaDashboardUrl = "${grafanaUrl}${dashboardPath}?orgId=${orgId}"
 
                      // Use the dashboard URL to construct the API URL
-                     def grafanaApiUrl = "${grafanaDashboardUrl}/api/annotations?panelId=${panelId}"
+                     def grafanaApiUrl = "${grafanaDashboardUrl}?panelId=${panelId}"
 
                      echo "Constructing URL: ${grafanaApiUrl}"
 

@@ -35,6 +35,17 @@ pipeline {
                      }
 
                  }
+                   stages {
+                             stage('Docker build ') {
+                                 steps {
+                                     script {
+                                         // Build the Docker image
+                                         sh 'docker build -t ella/achat:latest .'
+                                     }
+                                 }
+                             }
+
+                   }
 
 
   }

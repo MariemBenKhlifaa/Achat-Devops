@@ -44,6 +44,16 @@ pipeline {
                                      }
                                  }
                              }
+                                  stage('Docker push') {
+                                         steps {
+                                             script {
+                                                 withCredentials([string(credentialsId: '60e2873a-55b8-4f1f-a6b3-969109211a98', variable: 'DOCKERHUB_PASSWORD')]) {
+                                                 // Push the Docker image to Docker Hub
+                                                 sh 'docker push ellaboulifi/achat:latest'
+                                                 }
+                                             }
+                                         }
+                                     }
 
 
 

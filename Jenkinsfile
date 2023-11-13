@@ -65,8 +65,22 @@ pipeline {
                 }
             }
          }
+          stage('Check Docker Containers') {
+             steps {
+                 script {
+                     // Check the status of Docker containers
+                     sh 'docker ps'
+                 }
+             }
+         }
   }
    post {
+        always {
+           // Clean up, for example, you might want to stop the containers
+           script {
+               sh 'docker compose down'
+           }
+        }
         success {
             echo 'successfully.'
         }

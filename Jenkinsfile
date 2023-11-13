@@ -74,35 +74,14 @@ pipeline {
                  }
              }
          }
-         stage('Grafana Monitoring') {
-             steps {
-                 script {
-                     def grafanaUrl = "http://192.168.1.82:3000"
-                     def dashboardPath = "/d/haryan-jenkins/jenkins3a-performance-and-health-overview"
-                     def orgId = 1
-                     def panelId = 15
-
-                     // Construct the Grafana dashboard URL
-                     def grafanaDashboardUrl = "${grafanaUrl}${dashboardPath}?orgId=${orgId}"
-
-                     // Use the dashboard URL to construct the API URL
-                     def grafanaApiUrl = "${grafanaDashboardUrl}?panelId=${panelId}"
-
-                     echo "Constructing URL: ${grafanaApiUrl}"
-
-                     def response = httpRequest(httpMode: 'GET', url: grafanaApiUrl)
-
-                     echo "Request URL: ${response.request.url}"
-                     echo "Request Headers: ${response.request.headers}"
-                     echo "Request Body: ${response.request.body}"
-                     echo "Response Code: ${response.getStatus()}"
-                     echo "Response Content: ${response.getContent()}"
-                     echo "Response Headers: ${response.getHeaders()}"
-
-                     def annotations = readJSON text: response.getContent()
-                     echo "Grafana Annotations: ${annotations}"
-                 }
-             }
+         stage('Grafana Import Dashboard') {
+            steps {
+                script {
+                    // Add steps to import the Jenkins dashboard in Grafana
+                    // Use the Grafana API to import the dashboard with ID 9964
+                    sh 'curl -X POST -u admin:admin -H "Content-Type: application/json" -d \'{"dashboard": {"id": 9964},"inputs": [{"name": "DS_PROMETHEUS","type": "datasource","pluginId": "prometheus","value": "Prometheus"}]}}\' http://<192.168.1.82>:3000/api/dashboards/import'
+                }
+            }
          }
 
   }

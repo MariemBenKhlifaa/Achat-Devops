@@ -79,8 +79,11 @@ pipeline {
                 script {
                     // Add steps to import the Jenkins dashboard in Grafana
                     // Use the Grafana API to import the dashboard with ID 9964
-                    sh 'curl -X POST -u admin:grafana -H "Content-Type: application/json" -d \'{"dashboard":  {"id": 9964, "title": "Jenkins: Performance and Health Overview"},"inputs": [{"name": "DS_PROMETHEUS","type": "datasource","pluginId": "prometheus","value": "Prometheus"}]}}\' http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                }
+                    def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
+
+                    def curlCommand = """curl -X GET -u admin:grafana -H "Content-Type: application/json" $grafanaUrl"""
+
+                    sh curlCommand                }
             }
          }
 

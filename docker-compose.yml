@@ -28,5 +28,9 @@ services:
       - MYSQL_DATABASE=achatdb
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     restart: unless-stopped
-    
+    networks:
+      - devops-network
 
+networks:
+  devops-network:
+    driver: bridge

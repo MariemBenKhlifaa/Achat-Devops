@@ -1,6 +1,11 @@
 pipeline {
   agent any
- 
+ options {
+        buildDiscarder(logRotator(artifactNumToKeepStr: '10', buildNumToKeepStr: '10', daysToKeepStr: '10'))
+        timestamps()
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
   stages {
         stage('Get source Code') {
               steps {

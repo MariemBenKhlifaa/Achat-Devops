@@ -74,28 +74,36 @@ pipeline {
                  }
              }
          }
-          stage('Grafana Monitoring') {
-                steps {
-                    script {
-                        echo "Starting Grafana Monitoring Stage"
+         stage('Grafana Monitoring') {
+             steps {
+                 script {
+                     def grafanaUrl = "http://192.168.1.82:3000"
+                     def dashboardPath = "/d/haryan-jenkins/jenkins3a-performance-and-health-overview"
+                     def orgId = 1
+                     def panelId = 15
 
-                        def grafanaUrl = "http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1"
-                        def panelId = 15
+                     // Construct the Grafana dashboard URL
+                     def grafanaDashboardUrl = "${grafanaUrl}${dashboardPath}?orgId=${orgId}"
 
-                        echo "Constructing URL: ${grafanaUrl}/api/annotations?panelId=${panelId}"
+                     // Use the dashboard URL to construct the API URL
+                     def grafanaApiUrl = "${grafanaDashboardUrl}/api/annotations?panelId=${panelId}"
 
-                        def response = httpRequest(httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}")
+                     echo "Constructing URL: ${grafanaApiUrl}"
 
-                        echo "Response Code: ${response.getStatus()}"
-                        echo "Response Content: ${response.getContent()}"
+                     def response = httpRequest(httpMode: 'GET', url: grafanaApiUrl)
 
-                        def annotations = readJSON text: response.getContent()
-                        echo "Grafana Annotations: ${annotations}"
+                     echo "Request URL: ${response.request.url}"
+                     echo "Request Headers: ${response.request.headers}"
+                     echo "Request Body: ${response.request.body}"
+                     echo "Response Code: ${response.getStatus()}"
+                     echo "Response Content: ${response.getContent()}"
+                     echo "Response Headers: ${response.getHeaders()}"
 
-                        echo "Finishing Grafana Monitoring Stage"
-                    }
-                }
-            }
+                     def annotations = readJSON text: response.getContent()
+                     echo "Grafana Annotations: ${annotations}"
+                 }
+             }
+         }
 
   }
    post {

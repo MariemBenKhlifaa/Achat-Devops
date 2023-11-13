@@ -79,26 +79,28 @@ pipeline {
                  }
              }
          }
-        stage('Grafana Monitoring') {
-             steps {
-                 script {
-                     def grafanaUrl = "http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1"
-                     def panelId = 15
+          stage('Grafana Monitoring') {
+                steps {
+                    script {
+                        echo "Starting Grafana Monitoring Stage"
 
-                     // Use the httpRequest step from the plugin
-                     def response = httpRequest(httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}")
+                        def grafanaUrl = "http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1"
+                        def panelId = 15
 
-                     echo "Response Code: ${response.getStatus()}"
-                     echo "Response Content: ${response.getContent()}"
+                        echo "Constructing URL: ${grafanaUrl}/api/annotations?panelId=${panelId}"
 
-                     // Process the response, you can use the data in your pipeline
-                     def annotations = readJSON text: response.getContent()
-                     echo "Grafana Annotations: ${annotations}"
+                        def response = httpRequest(httpMode: 'GET', url: "${grafanaUrl}/api/annotations?panelId=${panelId}")
 
-                     // You can add more steps to interact with Grafana as needed
-                 }
-             }
-         }
+                        echo "Response Code: ${response.getStatus()}"
+                        echo "Response Content: ${response.getContent()}"
+
+                        def annotations = readJSON text: response.getContent()
+                        echo "Grafana Annotations: ${annotations}"
+
+                        echo "Finishing Grafana Monitoring Stage"
+                    }
+                }
+            }
 
   }
    post {

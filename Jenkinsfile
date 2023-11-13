@@ -23,6 +23,13 @@ pipeline {
                 }
             }
         }
+  stage('SonarQube Analysis') {
+             steps {
+                 echo 'Analyzing code with SonarQube...'
+                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+             }
+         }
+
 
   }
    post {

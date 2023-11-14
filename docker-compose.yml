@@ -12,7 +12,7 @@ services:
       - my-network
 
   spring-boot-app:
-    image: oussama00001/achatback
+    image: oussemamzg/achatback
     container_name: app-back
     ports:
       - "8088:8089"
@@ -25,7 +25,7 @@ services:
     networks:
       - my-network
   angular-app:
-    image: oussama00001/frontachat
+    image: oussemamzg/frontachat
     container_name: app-front
     ports:
       - "4200:80"

@@ -2,8 +2,8 @@ version: "3"
 
 services:
   achat-devops:
-    image: ellaboulifi/achat-devops:latest
-    container_name: achat-devops
+    image: ellaboulifi/achat:latest
+    container_name: achat
     ports:
       - "8089:8089"
     environment:

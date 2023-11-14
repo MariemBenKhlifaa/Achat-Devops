@@ -53,7 +53,7 @@ pipeline {
                                                      sh 'docker push ellaboulifi/achat:latest'
                                                  }
                                              }
-                                            
+
                                                         stage('Docker compose') {
                                                                  steps {
                                                                      script {

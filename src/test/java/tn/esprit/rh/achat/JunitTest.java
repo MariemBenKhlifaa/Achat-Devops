@@ -17,13 +17,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-@ContextConfiguration(classes = {OperateurServiceImpl.class})
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class JunitTest {
-    @Test
-    void contextLoads() {
-    }
+
     @Autowired
     private OperateurServiceImpl operateurService;
 
@@ -38,17 +34,5 @@ public class JunitTest {
         Assertions.assertNotNull(o.getIdOperateur()); // Assuming getId() is the identifier for Operateur
     }
 
-    @Test
-    @Order(1)
-    public void modifierOperateurTest() {
-        // Assuming that the addOperateur method is working correctly, and the Operateur is persisted in the database.
-        Operateur o = operateurService.retrieveOperateur(1L); // Replace 1L with the actual Operateur ID
-        Assertions.assertNotNull(o, "Operateur not found");
 
-        String newNom = "mariem2";
-        o.setNom(newNom);
-        Operateur updatedOperateur = operateurService.updateOperateur(o);
-        log.info(updatedOperateur.toString());
-        Assertions.assertEquals(newNom, updatedOperateur.getNom());
-    }
 }

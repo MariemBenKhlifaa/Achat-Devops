@@ -24,11 +24,10 @@ import java.util.Set;
 @ExtendWith(SpringExtension.class)
 public class JunitTest
 {
+
     @Autowired
     private OperateurServiceImpl operateurService;
-    @Test
-    void contextLoads() {
-    }
+
 
     Set<Facture> factures = new HashSet<>();
     Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();

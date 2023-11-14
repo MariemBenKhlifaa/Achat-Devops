@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
+@ContextConfiguration(classes = {OperateurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class JunitTest {

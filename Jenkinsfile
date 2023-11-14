@@ -44,13 +44,13 @@ pipeline {
                                      }
                                  }
                              }
-                                 
+
 
                                      stage('Docker push image to Docker Hub') {
                                                  steps {
                                                      echo 'Pushing Docker image to Docker Hub'
                                                      sh "docker login -u ellaboulifi -p dockerdocker"
-                                                     sh 'docker push ellaboulifi/achat:1-0'
+                                                     sh 'docker push ellaboulifi/achat:latest'
                                                  }
                                              }
 

@@ -18,10 +18,10 @@ import tn.esprit.rh.achat.services.OperateurServiceImpl;
 import java.util.HashSet;
 import java.util.Set;
 
-@SpringBootTest
+
+@Slf4j
 @ContextConfiguration(classes = {OperateurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-@Slf4j
 public class JunitTest
 {
     @Autowired

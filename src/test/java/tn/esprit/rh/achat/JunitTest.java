@@ -18,7 +18,7 @@ import java.util.Set;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Slf4j
-public class OperateurunitTest
+public class JunitTest
 {
     @Autowired
     private OperateurServiceImpl operateurService;

@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 @Slf4j
 @ContextConfiguration(classes = {OperateurServiceImpl.class})
-//@ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class)
 public class OperateurTest {
 
     @MockBean

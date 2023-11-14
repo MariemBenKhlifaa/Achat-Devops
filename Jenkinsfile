@@ -53,13 +53,14 @@ pipeline {
                                                      sh 'docker push ellaboulifi/achat:latest'
                                                  }
                                              }
-                                                stage('Docker compose') {
-                                                         steps {
-                                                             script {
-                                                                 sh 'docker-compose up -d'
-                                                             }
-                                                         }
-                                                     }
+                                            
+                                                        stage('Docker compose') {
+                                                                 steps {
+                                                                     script {
+                                                                         sh 'docker compose up -d'
+                                                                     }
+                                                                 }
+                                                              }
 
 
 

@@ -61,6 +61,11 @@ pipeline {
                                                                      }
                                                                  }
                                                               }
+                                                              stage('prometheus grafana') {
+                                                                          steps {
+                                                                              echo 'prometheus grafana '
+                                                                          }
+                                                                      }
 
 
 

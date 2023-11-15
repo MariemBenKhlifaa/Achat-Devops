@@ -73,18 +73,11 @@ pipeline {
                                                                                   }
                                                                               }
 
-                                                                           post {
-                                                                              always {
-                                                                                  emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
-                                                                              }
-                                                                          }
-
-
-
-
 
 
   }
+
+
    post {
         success {
             echo 'successfully.'
@@ -92,5 +85,9 @@ pipeline {
         failure {
             echo 'Failed'
         }
+
+       always {
+        emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
+       }
     }
 }

@@ -27,9 +27,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: achatdb
+      MYSQL_DATABASE: achat
     ports:
-      - "3307:3307"
+      - "3306:3306"
     restart: unless-stopped
     networks:
       - devops-network

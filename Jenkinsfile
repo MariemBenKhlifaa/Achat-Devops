@@ -46,14 +46,14 @@ pipeline {
 	stage('Build Docker Image') {
             steps {
                script {
-                   sh 'docker build -t mariem78/achat-devops:latest .'
+                   sh 'docker build -t mariem78/achat:latest .'
                 }
             }
         }
         stage('Push to DockerHub') {
             steps {
                 script {
-                    sh 'docker push mariem78/achat-devops:latest'
+                    sh 'docker push mariem78/achat:latest'
                 }
             }
         }

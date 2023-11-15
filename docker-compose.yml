@@ -29,7 +29,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: achatdb
     ports:
-      - "3306:3306"
+      - "3307:3307"
     restart: unless-stopped
     networks:
       - devops-network

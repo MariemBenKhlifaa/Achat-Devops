@@ -27,7 +27,7 @@ public class JunitTest {
     @Order(0)
     public void ajouterOperateurTest() {
         Set<Facture> factures = new HashSet<>();
-        Operateur o = Operateur.builder().nom("mariem").prenom("benkhlifa").password("12345678").factures(factures).build();
+        Operateur o = Operateur.builder().nom("mariemmm").prenom("benkhlifa").password("1234567888").factures(factures).build();
 
         operateurService.addOperateur(o);
         log.info(o.toString());

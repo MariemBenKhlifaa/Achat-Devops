@@ -1,5 +1,10 @@
 FROM openjdk:11
 EXPOSE 8089
-ADD /target/achat-1.0.jar achat.jar
 
-ENTRYPOINT ["java", "-jar","achat.jar"]
+WORKDIR /app
+
+COPY sito/db/achatdb /app/sito/db/achatdb
+
+COPY target/your-specific-jar-name.jar achat.jar
+
+ENTRYPOINT ["java", "-jar", "achat.jar"]

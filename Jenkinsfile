@@ -67,6 +67,20 @@ pipeline {
                                                                           }
                                                                       }
 
+                                                                       stage('Mailing') {
+                                                                                  steps {
+                                                                                      echo "OK"
+                                                                                  }
+                                                                              }
+
+                                                                           post {
+                                                                              always {
+                                                                                  emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
+                                                                              }
+                                                                          }
+
+
+
 
 
 

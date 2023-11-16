@@ -100,7 +100,7 @@ pipeline {
         }
         success {
             echo 'The process completed successfully.'
-             emailext to: 'eya.bouthouri@esprit.tn',
+             mail to: 'eya.bouthouri@esprit.tn',
                        subject: "Succès du Pipeline",
                        body: "Le pipeline a été exécuté avec succès."
                                  verbose: true
@@ -108,7 +108,7 @@ pipeline {
         }
         failure {
             echo 'The process failed.'
-            emailext to: 'eya.bouthouri@esprit.tn',
+            mail to: 'eya.bouthouri@esprit.tn',
              subject: "Échec du Pipeline",
                        body: "Il y a eu un problème avec l'exécution du pipeline."
 

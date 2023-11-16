@@ -71,13 +71,13 @@ pipeline {
                                                                                   steps {
                                                                                       echo "OK"
                                                                                   }
-                                                                              }
-  }
+                                                                             }
+
 
    post {
         success {
             echo 'successfully.'
-            
+
         }
         failure {
             echo 'Failed'
@@ -87,4 +87,4 @@ pipeline {
          [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
        }
     }
-}
+}  }

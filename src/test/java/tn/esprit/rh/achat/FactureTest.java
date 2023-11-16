@@ -67,7 +67,7 @@ public class FactureTest {
         assertTrue(facture.isArchivee());
         verify(factureRepository, Mockito.times(1)).save(facture);
     }*/
-/*
+
     @Test
     public void testRetrieveFacture() {
         // Arrange
@@ -81,9 +81,9 @@ public class FactureTest {
         // Assert
         assertNotNull(result);
         verify(factureRepository, Mockito.times(1)).findById(factureId);
-    }*/
+    }
 }
-}
+
 
 
 

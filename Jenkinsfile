@@ -72,12 +72,13 @@ pipeline {
         }
            stage('Grafana') {
                    steps {
-                       script {
+                         script {
+                                          def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
+                                          def grafanaCredentials = credentials('GrafanaCredentialsId')
+                                          def curlCommand = "curl -X GET -u admin:${grafanaCredentials} -H 'Content-Type: application/json' ${grafanaUrl}"
 
-            def response = sh(script: 'curl -v -X POST -u admin:grafana -H "Content-Type: application/json" -d \'{"dashboard": {"id": 9964},"inputs": [{"name": "DS_PROMETHEUS","type": "datasource","pluginId": "prometheus","value": "Prometheus"}]}\' http://192.168.1.26:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1&from=1699907375363&to=1699909175363', returnStdout: true).trim()
-            echo "Response from Grafana: ${response}"
-
-                                   }
+                                          sh curlCommand
+                                      }
                    }
                 }
 

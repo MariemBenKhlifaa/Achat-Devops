@@ -84,12 +84,11 @@ pipeline {
        stage('Grafana Import Dashboard') {
            steps {
                script {
-                   def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                   def grafanaCredentials = credentials('GrafanaCredentialsId')
-                   def curlCommand = "curl -X GET -u admin:${grafanaCredentials} -H 'Content-Type: application/json' ${grafanaUrl}"
-
-                   sh curlCommand
-               }
+                   withCredentials([string(credentialsId: 'GrafanaCredentialsId', variable: 'grafanaCredentials')]) {
+                       def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
+                       def curlCommand = """curl -X GET -u \${grafanaCredentials} -H "Content-Type: application/json" $grafanaUrl"""
+                       sh curlCommand
+                   }
            }
        }
 

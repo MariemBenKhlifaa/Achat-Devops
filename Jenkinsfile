@@ -69,7 +69,8 @@ pipeline {
                         emailext body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
                                  subject: 'Jenkins Build Failed',
                                  to: 'dorsaf.charfeddine@esprit.tn'
-                }
+                    }
+                 }
             }
          }
           stage('Check Docker Containers') {

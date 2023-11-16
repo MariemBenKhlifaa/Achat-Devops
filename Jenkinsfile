@@ -71,18 +71,17 @@ pipeline {
             }
         }
            stage('Grafana') {
-                   steps {
-                         script {
-                             def grafanaUrl = 'http://192.168.1.26:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                             def gCredentials = credentials('GrafanaCredentialsId')
-                             def curlCommand = "curl -X GET -u admin:${gCredentials} -H 'Content-Type: application/json' ${grafanaUrl}"
-
-                                          sh curlCommand
-                                      }
+               steps {
+                   script {
+                       def grafanaUrl = 'http://192.168.1.26:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
+                       withCredentials([usernamePassword(credentialsId: 'GrafanaCredentialsId', usernameVariable: 'GRAFANA_USERNAME', passwordVariable: 'GRAFANA_PASSWORD')]) {
+                           def curlCommand = "curl -X GET -u ${GRAFANA_USERNAME}:${GRAFANA_PASSWORD} -H 'Content-Type: application/json' ${grafanaUrl}"
+                           sh curlCommand
+                       }
                    }
-                }
+               }
+           }
 
-         }
 
 
     post {

@@ -49,7 +49,16 @@ pipeline {
                   }
             }
         }
-
+        stage('Docker push') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
+                    // Push the Docker image to Docker Hub
+                    sh 'docker push dorsafch/achat_dorsaf:latest'
+                    }
+                }
+            }
+        }
          stage('Docker compose') {
             steps {
                 script {

@@ -77,7 +77,7 @@ pipeline {
                script {
                    withCredentials([string(credentialsId: 'GrafanaCredentialsId', usernameVariable: 'USERNAME_GRAFANA', passwordVariable: 'PASSWORD_GRAFANA'))]) {
                        def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                       def curlCommand = """curl -X GET -u ${USERNAME_GRAFANA}:${PASSWORD_GRAFANA} -H "Content-Type: application/json" $grafanaUrl"""
+                           def curlCommand = "curl -X GET -u ${USERNAME_GRAFANA}:${PASSWORD_GRAFANA} -H 'Content-Type: application/json' ${grafanaUrl}"
                        sh curlCommand
                    }
                 }

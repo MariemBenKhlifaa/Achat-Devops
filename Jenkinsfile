@@ -72,22 +72,20 @@ pipeline {
                                                                                       echo "OK"
                                                                                   }
                                                                               }
-
-
-
   }
-
 
    post {
         success {
             echo 'successfully.'
+            emailext attachLog: true,
+                     body: 'A Test EMail',
+                     subject: 'Jenkins',
+                     to: 'elaa.boulifi@esprit.tn'
+
         }
         failure {
             echo 'Failed'
         }
 
-       always {
-        emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
-       }
     }
 }

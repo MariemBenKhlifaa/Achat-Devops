@@ -62,7 +62,7 @@ pipeline {
          stage('Docker compose') {
             steps {
                 script {
-                    sh 'docker-compose up -d'
+                    sh 'docker compose up -d'
                 }
             }
          }
@@ -108,16 +108,14 @@ pipeline {
         }
         success {
             echo 'successfully.'
-             emailext attachLog: true,
-                      body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
+             emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
                       subject: 'Jenkins Build Successful',
                       to: 'dorsaf.charfeddine@esprit.tn'
         }
         failure {
             echo 'Failed'
-            emailext attachLog: true,
-                      body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
-                      subject: 'Jenkins Build Failed',
+            emailext subject: 'Jenkins Build Failed',
+                     body: "Build failed. Details of the error:\n${currentBuild.rawBuild.getLog(100)}",
                       to: 'dorsaf.charfeddine@esprit.tn'
         }
     }

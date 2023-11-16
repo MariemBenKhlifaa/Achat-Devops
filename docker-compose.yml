@@ -16,7 +16,7 @@ services:
 
       - mysql
     networks:
-      - devops-network
+      - eya-network
 
 
   mysql:
@@ -32,7 +32,7 @@ services:
       - "3306:3306"
     restart: unless-stopped
     networks:
-      - devops-network
+      - eya-network
 
 networks:
-  devops-network:
+  eya-network:

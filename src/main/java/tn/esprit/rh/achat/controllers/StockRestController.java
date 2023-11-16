@@ -9,10 +9,11 @@ import tn.esprit.rh.achat.services.IStockService;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @Api(tags = "Gestion des stocks")
 @RequestMapping("/stock")
-@CrossOrigin("*")
 public class StockRestController {
 
 	@Autowired

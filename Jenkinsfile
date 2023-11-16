@@ -62,7 +62,7 @@ pipeline {
          stage('Docker compose') {
             steps {
                 script {
-                    sh 'docker compose up -d'
+                    sh 'docker-compose up -d'
                 }
             }
          }
@@ -74,6 +74,13 @@ pipeline {
                  }
              }
          }
+         stage('Test Prometheus Metrics') {
+             steps {
+                 // Assuming Prometheus is running on the same machine where Jenkins is running
+                 sh 'curl -s http://192.168.1.82:9090/api/v1/query?query=up'
+                 // sh 'curl -s http://localhost:9090/api/v1/query?query=jenkins_builds_total'
+             }
+         }
          stage('Grafana Import Dashboard') {
             steps {
                 script {
@@ -83,7 +90,8 @@ pipeline {
 
                     def curlCommand = """curl -X GET -u admin:grafana -H "Content-Type: application/json" $grafanaUrl"""
 
-                    sh curlCommand                }
+                    sh curlCommand
+                 }
             }
          }
 

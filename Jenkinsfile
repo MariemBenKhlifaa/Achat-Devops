@@ -43,7 +43,6 @@ pipeline {
                         withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
                             sh 'docker login -u dorsafch -p $DOCKERHUB_PASSWORD'
                         }
-
                         // Build the Docker image with a different name or tag
                         sh 'docker build -t dorsafch/achat_dorsaf:latest .'
                   }
@@ -62,7 +61,7 @@ pipeline {
          stage('Docker compose') {
             steps {
                 script {
-                        sh 'docker-compose up -d'
+                        sh 'docker compose up -d'
                  }
             }
          }

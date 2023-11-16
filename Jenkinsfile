@@ -89,6 +89,7 @@ pipeline {
                        def curlCommand = """curl -X GET -u \${grafanaCredentials} -H "Content-Type: application/json" $grafanaUrl"""
                        sh curlCommand
                    }
+                }
            }
        }
 

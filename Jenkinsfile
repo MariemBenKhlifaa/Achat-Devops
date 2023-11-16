@@ -62,17 +62,7 @@ pipeline {
          stage('Docker compose') {
             steps {
                 script {
-                    try  {
                         sh 'docker-compose up -d'
-                    } catch (Exception e){
-                        echo "build failed"
-                        withCredentials([string(credentialsId: 'RECIPIENT_EMAIL', variable: 'RECIPIENT_EMAIL')]) {
-                            emailext body: "Build failed.",
-                                     subject: 'Jenkins Build Failed',
-                                     to: "${RECIPIENT_EMAIL}",
-                                     attachLog: true
-                         }
-                    }
                  }
             }
          }

@@ -117,8 +117,7 @@ pipeline {
            // This block will be executed on a failed build
            echo 'Build failed.'
            withCredentials([string(credentialsId: 'email', variable: 'email')]) {
-               emailext subject: 'Jenkins Build Failed',
-                         body: "Build failed. Details of the error:\n${currentBuild.rawBuild.getLog(100)}",
+               emailext  body: "Build failed. Details of the error:\n${currentBuild.rawBuild.getLog(100)}",
                          to: 'dorsaf.charfeddine@esprit.tn',
                          mimeType: 'text/html',
                          subject: 'Jenkins Build Failed',

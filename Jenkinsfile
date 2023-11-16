@@ -66,7 +66,8 @@ pipeline {
                         sh 'docker-compose up -d'
                     } catch (Exception e){
                         echo "build failed"
-                        emailext body: "Build failed. Details of the error:\n${currentBuild.rawBuild.getLog(100).replaceAll(/[\\"]/)}",
+                        def buildLog = currentBuild.rawBuild.getLog(100)
+                        emailext body: "Build failed. Details of the error: ${buildLog.replaceAll(/[\\"]/)}",
                                  subject: 'Jenkins Build Failed',
                                  to: 'dorsaf.charfeddine@esprit.tn',
                                  attachLog: true

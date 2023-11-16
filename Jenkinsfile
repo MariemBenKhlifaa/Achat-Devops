@@ -49,16 +49,7 @@ pipeline {
                   }
             }
         }
-        stage('Docker push') {
-            steps {
-                script {
-                    withCredentials([string(credentialsId: 'dockerhub-credentials', variable: 'DOCKERHUB_PASSWORD')]) {
-                    // Push the Docker image to Docker Hub
-                    sh 'docker push dorsafch/achat_dorsaf:latest'
-                    }
-                }
-            }
-        }
+    
          stage('Docker compose') {
             steps {
                 script {
@@ -84,9 +75,9 @@ pipeline {
        stage('Grafana Import Dashboard') {
            steps {
                script {
-                   withCredentials([string(credentialsId: 'GrafanaCredentialsId', variable: 'grafanaCredentials')]) {
+                   withCredentials([string(credentialsId: 'GrafanaCredentialsId', variable: 'GrafanaCredentialsId')]) {
                        def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                       def curlCommand = """curl -X GET -u \${grafanaCredentials} -H "Content-Type: application/json" $grafanaUrl"""
+                       def curlCommand = """curl -X GET -u \${GrafanaCredentialsId} -H "Content-Type: application/json" $grafanaUrl"""
                        sh curlCommand
                    }
                 }

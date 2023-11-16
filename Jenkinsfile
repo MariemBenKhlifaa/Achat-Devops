@@ -78,7 +78,7 @@ pipeline {
         success {
             echo 'successfully.'
               emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
-                                  subject: 'Jenkins Build Successful',
+                                  subject: 'JJenkins Email Test',
                                   to: 'elaa.boulifi@esprit.tn'
 
         }

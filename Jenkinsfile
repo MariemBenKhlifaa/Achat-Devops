@@ -74,7 +74,7 @@ pipeline {
                    steps {
                        script {
 
-                           sh 'curl -X POST -u admin:grafana -H "Content-Type: application/json" -d \'{"dashboard": {"id": 9964},"inputs": [{"name": "DS_PROMETHEUS","type": "datasource","pluginId": "prometheus","value": "Prometheus"}]}}\' http://192.168.1.26:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1&from=1699907375363&to=1699909175363'
+                           sh 'curl -v  -X POST -u admin:grafana -H "Content-Type: application/json" -d \'{"dashboard": {"id": 9964},"inputs": [{"name": "DS_PROMETHEUS","type": "datasource","pluginId": "prometheus","value": "Prometheus"}]}}\' http://192.168.1.26:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview?orgId=1&from=1699907375363&to=1699909175363'
                        }
                    }
                 }

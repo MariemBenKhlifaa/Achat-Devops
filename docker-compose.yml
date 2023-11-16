@@ -34,7 +34,7 @@ services:
     image: mariem78/devops-front:latest
     container_name: angular-container
     ports:
-      - "4200:4200"  
+      - "4200:80"  
     networks:
       - devops-network
 

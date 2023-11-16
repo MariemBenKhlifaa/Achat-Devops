@@ -14,7 +14,6 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     depends_on:
       - mysql
-      - angular-app
     networks:
       - devops-network
 

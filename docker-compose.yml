@@ -13,11 +13,10 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
     depends_on:
-      
       - mysql
+      -angular-app
     networks:
       - devops-network
-
 
   mysql:
     image: mysql:5.6
@@ -32,5 +31,14 @@ services:
     networks:
       - devops-network
 
+  angular-app:
+    image: mariem78/devops-front:latest
+    container_name: angular-container
+    ports:
+      - "4200:4200"  
+    networks:
+      - devops-network
+
 networks:
   devops-network:
+

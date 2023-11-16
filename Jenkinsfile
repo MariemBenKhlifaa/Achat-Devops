@@ -81,17 +81,18 @@ pipeline {
                  // sh 'curl -s http://localhost:9090/api/v1/query?query=jenkins_builds_total'
              }
          }
-        stage('Grafana Import Dashboard') {
-            steps {
-                script {
-                    def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-                    def grafanaCredentials = credentials('GrafanaCredentialsId')
-                    def curlCommand = """curl -X GET -u admin:${grafanaCredentials} -H "Content-Type: application/json" $grafanaUrl"""
+       stage('Grafana Import Dashboard') {
+           steps {
+               script {
+                   def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
+                   def grafanaCredentials = credentials('GrafanaCredentialsId')
+                   def curlCommand = "curl -X GET -u admin:${grafanaCredentials} -H 'Content-Type: application/json' ${grafanaUrl}"
 
-                    sh curlCommand
-                }
-            }
-        }
+                   sh curlCommand
+               }
+           }
+       }
+
          stage('Mail') {
               steps {
                   echo "mail envoye"

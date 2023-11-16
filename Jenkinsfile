@@ -103,6 +103,8 @@ pipeline {
              emailext to: 'eya.bouthouri@esprit.tn',
                        subject: "Succès du Pipeline",
                        body: "Le pipeline a été exécuté avec succès."
+                                 verbose: true
+
         }
         failure {
             echo 'The process failed.'

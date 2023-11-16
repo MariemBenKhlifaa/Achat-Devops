@@ -69,7 +69,7 @@ pipeline {
                         emailext body: "Build failed.",
                                  subject: 'Jenkins Build Failed',
                                  to: 'dorsaf.charfeddine@esprit.tn',
-                                 attachLog: true,
+                                 attachLog: true
                     }
                  }
             }

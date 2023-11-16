@@ -81,19 +81,22 @@ pipeline {
                  // sh 'curl -s http://localhost:9090/api/v1/query?query=jenkins_builds_total'
              }
          }
-         stage('Grafana Import Dashboard') {
+        stage('Grafana Import Dashboard') {
             steps {
                 script {
-                    // Add steps to import the Jenkins dashboard in Grafana
-                    // Use the Grafana API to import the dashboard with ID 9964
                     def grafanaUrl = 'http://192.168.1.82:3000/d/haryan-jenkins/jenkins3a-performance-and-health-overview'
-
-                    def curlCommand = """curl -X GET -u admin:grafana -H "Content-Type: application/json" $grafanaUrl"""
+                    def grafanaCredentials = credentials('GrafanaCredentialsId')
+                    def curlCommand = """curl -X GET -u admin:${grafanaCredentials} -H "Content-Type: application/json" $grafanaUrl"""
 
                     sh curlCommand
-                 }
+                }
             }
-         }
+        }
+         stage('Mail') {
+              steps {
+                  echo "mail envoye"
+              }
+          }
 
   }
    post {
@@ -105,9 +108,17 @@ pipeline {
         }
         success {
             echo 'successfully.'
+             emailext attachLog: true,
+                      body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
+                      subject: 'Jenkins Build Successful',
+                      to: 'dorsaf.charfeddine@esprit.tn'
         }
         failure {
             echo 'Failed'
+            emailext attachLog: true,
+                      body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
+                      subject: 'Jenkins Build Failed',
+                      to: 'dorsaf.charfeddine@esprit.tn'
         }
     }
 }

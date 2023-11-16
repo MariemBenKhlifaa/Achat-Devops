@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-  stage('SonarQube Analysis') {
+   stage('SonarQube Analysis') {
              steps {
                  echo 'Analyzing code with SonarQube...'
                  sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
@@ -77,14 +77,17 @@ pipeline {
    post {
         success {
             echo 'successfully.'
+              emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
+                                  subject: 'Jenkins Build Successful',
+                                  to: 'elaa.boulifi@esprit.tn'
 
         }
         failure {
             echo 'Failed'
+              emailext body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
+                                  subject: 'Jenkins Build Failed',
+                                  to: 'elaa.boulifi@esprit.tn'
         }
-       always {
-        emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'],
-         [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
-       }
+
     }
 }

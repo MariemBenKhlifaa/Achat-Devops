@@ -66,9 +66,9 @@ pipeline {
                         sh 'docker-compose up -d'
                     } catch (Exception e){
                         echo "build failed"
-                        emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
-                              subject: 'Jenkins Build Successful',
-                              to: 'dorsaf.charfeddine@esprit.tn'}
+                        emailext body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
+                                 subject: 'Jenkins Build Failed',
+                                 to: 'dorsaf.charfeddine@esprit.tn'
                 }
             }
          }
@@ -122,9 +122,9 @@ pipeline {
        failure {
            // This block will be executed on a failed build
            echo 'Build failed.'
-           emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
-                    subject: 'Jenkins Build Successful',
-                    to: 'dorsaf.charfeddine@esprit.tn'
+           emailext body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
+                      subject: 'Jenkins Build Failed',
+                      to: 'dorsaf.charfeddine@esprit.tn'
        }
     }
 }

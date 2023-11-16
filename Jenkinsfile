@@ -72,7 +72,7 @@ pipeline {
                                                                                       echo "OK"
                                                                                   }
                                                                              }
-
+  }
 
    post {
         success {
@@ -87,4 +87,4 @@ pipeline {
          [$class: 'RequesterRecipientProvider']], subject: 'deploiment terminé'
        }
     }
-}  }
+}

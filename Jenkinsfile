@@ -66,11 +66,12 @@ pipeline {
                         sh 'docker-compose up -d'
                     } catch (Exception e){
                         echo "build failed"
-                        def buildLog = currentBuild.rawBuild.getLog(100)
-                        emailext body: "Build failed. Details of the error: ${buildLog.replaceAll(/[\\"]/)}",
-                                 subject: 'Jenkins Build Failed',
-                                 to: 'dorsaf.charfeddine@esprit.tn',
-                                 attachLog: true
+                        withCredentials([string(credentialsId: 'RECIPIENT_EMAIL', variable: 'RECIPIENT_EMAIL')]) {
+                            emailext body: "Build failed.",
+                                     subject: 'Jenkins Build Failed',
+                                     to: "${RECIPIENT_EMAIL}",
+                                     attachLog: true
+                         }
                     }
                  }
             }
@@ -118,16 +119,20 @@ pipeline {
         }
         success {
             echo 'successfully.'
-             emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
-                      subject: 'Jenkins Build Successful',
-                      to: 'dorsaf.charfeddine@esprit.tn'
+            withCredentials([string(credentialsId: 'RECIPIENT_EMAIL', variable: 'RECIPIENT_EMAIL')]) {
+                emailext body: 'Votre build a réussi. Veuillez consulter Jenkins pour les détails.',
+                         subject: 'Jenkins Build Successful',
+                         to: "${RECIPIENT_EMAIL	}"
+             }
         }
        failure {
            // This block will be executed on a failed build
            echo 'Build failed.'
-           emailext body: "Votre build a échoué. Détails de l'erreur :\n${currentBuild.rawBuild.getLog(100)}",
-                      subject: 'Jenkins Build Failed',
-                      to: 'dorsaf.charfeddine@esprit.tn'
+            withCredentials([string(credentialsId: 'RECIPIENT_EMAIL', variable: 'RECIPIENT_EMAIL')]) {
+                emailext body: "Votre build a échoué.",
+                        subject: 'Jenkins Build Failed',
+                        to: "${RECIPIENT_EMAIL}"
+            }
        }
     }
 }

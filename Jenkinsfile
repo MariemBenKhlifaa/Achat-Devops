@@ -82,6 +82,12 @@ pipeline {
                }
            }
 
+            stage('Mailing') {
+                         steps {
+                             echo "mail success"
+                         }
+                     }
+
            }
 
 
@@ -94,9 +100,15 @@ pipeline {
         }
         success {
             echo 'The process completed successfully.'
+             mail to: 'eya.bouthouri@esprit.tn',
+                       subject: "Succès du Pipeline",
+                       body: "Le pipeline a été exécuté avec succès."
         }
         failure {
             echo 'The process failed.'
+            mail to: 'eya.bouthouri@esprit.tn',
+             subject: "Échec du Pipeline",
+                       body: "Il y a eu un problème avec l'exécution du pipeline."
         }
     }
 }

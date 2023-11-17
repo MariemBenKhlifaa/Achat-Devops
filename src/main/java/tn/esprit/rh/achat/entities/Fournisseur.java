@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 
-@Builder
+
 @Entity
 @Getter
 @Setter

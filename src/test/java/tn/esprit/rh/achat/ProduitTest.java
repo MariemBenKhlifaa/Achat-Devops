@@ -1,4 +1,4 @@
-/*
+
 package tn.esprit.rh.achat;
 
 import org.junit.jupiter.api.Test;
@@ -57,4 +57,3 @@ public class ProduitTest {
         verify(produitRepository).deleteById((Long) any());
     }
 }
-*/
